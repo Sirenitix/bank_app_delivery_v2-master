@@ -6,7 +6,7 @@ import lombok.*;
 
 @Getter
 @NoArgsConstructor
-public abstract class Account {
+public abstract class Account implements Cloneable {
     private AccountType accountType;
     private long id;
     private String clientID;
@@ -25,5 +25,14 @@ public abstract class Account {
     }
 
 
-
+    @Override
+    public Account clone() {
+        try {
+            Account clone = (Account) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
 }
